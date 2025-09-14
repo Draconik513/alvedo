@@ -37,8 +37,19 @@ const BirthdayCountdown = ({ isIOS }) => {
     return () => clearInterval(timer);
   }, []);
 
+  // Label fix (biar ga diterjemahkan)
+  const labels = {
+    days: "HARI",
+    hours: "JAM",
+    minutes: "MENIT",
+    seconds: "DETIK",
+  };
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50 p-4">
+    <div
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50 p-4 notranslate"
+      translate="no"
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -71,19 +82,14 @@ const BirthdayCountdown = ({ isIOS }) => {
               <motion.div
                 key={unit}
                 whileHover={{ scale: isIOS ? 1 : 1.1 }}
-                className="bg-white p-4 rounded-lg shadow-md text-center min-w-[70px] border border-pink-100"
+                className="bg-white p-4 rounded-lg shadow-md text-center min-w-[70px] border border-pink-100 notranslate"
+                translate="no"
               >
                 <div className="text-3xl font-bold text-pink-600">
                   {value.toString().padStart(2, "0")}
                 </div>
-                <div className="text-sm text-pink-500 uppercase">
-                  {unit === "days"
-                    ? "hari"
-                    : unit === "hours"
-                    ? "jam"
-                    : unit === "minutes"
-                    ? "menit"
-                    : "detik"}
+                <div className="text-sm text-pink-500">
+                  {labels[unit]}
                 </div>
               </motion.div>
             ))}
@@ -92,7 +98,7 @@ const BirthdayCountdown = ({ isIOS }) => {
 
         <div className="bg-white p-6 rounded-xl shadow-lg mb-8 border border-pink-100">
           <h3 className="text-xl font-semibold text-purple-600 mb-2">
-            📅 15 september 2025
+            📅 15 September 2025
           </h3>
           <p className="text-pink-600">
             Tanggal dimana senyumanmu akan menerangi hariku🥹
@@ -133,11 +139,7 @@ const BirthdayCountdown = ({ isIOS }) => {
               <h3 className="text-xl font-bold text-pink-600 mb-4">
                 Pesan Suara Untukmu 💌
               </h3>
-              <audio
-                controls
-                autoPlay
-                className="w-full mb-4"
-              >
+              <audio controls autoPlay className="w-full mb-4">
                 <source src={MaafAudio} type="audio/mp3" />
                 Browser kamu tidak mendukung pemutar audio.
               </audio>
